@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}roomlist{% endblock title %}
+{% block content %}
+<div class="main">
+    {% if rooms.count > 0 %}
+    {% for  room in  rooms %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{room.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{room.number}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{room.category}}</li>
+        </ul>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{room.rooms}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="{% url 'roomupd' room.id %}" class="card-link">Update</a>
+          <a href="{% url 'roomdel' room.id %}" class="card-link">Delete</a>
+        </div>
+      </div>
+    {% endfor %}
+    {% endif %}
+</div>
+<a href="{% url 'roomadd' %}" style="text-decoration: none;"><button>Add Room</button></a>
+{% endblock content %}

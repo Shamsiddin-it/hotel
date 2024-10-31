@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}userlist{% endblock title %}
+{% block content %}
+<div class="main">
+    {% if users.count > 0 %}
+    {% for  user in  users %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{user.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{user.full_name}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{user.email}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="{% url 'userupd' user.id %}" class="card-link">Update</a>
+          <a href="{% url 'userdel' user.id %}" class="card-link">Delete</a>
+        </div>
+      </div>
+    {% endfor %}
+    {% endif %}
+</div>
+<a href="{% url 'useradd' %}" style="text-decoration: none;"><button>Add User</button></a>
+{% endblock content %}
